@@ -15,12 +15,13 @@ extern "C"
   }
 
   // Given PID, get the CPUs associated with it
-  void get_cpu_affinity_to_pid(pid_t pid, int *cpu_list, int *cpu_count)
+  void get_cpu_affinity_to_pid(pid_t pid, int* cpu_list, int* cpu_count)
   {
     std::vector<int> cpus;
     // Allocate a CPU bitmask
-    struct bitmask *mask = numa_allocate_cpumask();
-    if (!mask)
+    struct bitmask* cpu_mask = numa_allocate_cpumask();
+    numa_bitmask_clearall(cpu_mask);
+    if (!cpu_mask)
     {
       fprintf(stderr, "numa_allocate_cpumask failed");
       *cpu_count = 0;
@@ -28,11 +29,11 @@ extern "C"
     }
 
     // Get the CPU affinity mask for the given PID
-    int result = numa_sched_getaffinity(pid, mask);
+    int result = numa_sched_getaffinity(pid, cpu_mask);
     if (result < 0)
     {
       fprintf(stderr, "numa_sched_getaffinity failed");
-      numa_free_cpumask(mask);
+      numa_free_cpumask(cpu_mask);
       *cpu_count = 0;
       return;
     }
@@ -42,7 +43,7 @@ extern "C"
     int num_possible_cpus = numa_num_possible_cpus();
     for (int i = 0; i < num_possible_cpus; i++)
     {
-      if (numa_bitmask_isbitset(mask, i))
+      if (numa_bitmask_isbitset(cpu_mask, i))
       {
         cpus.push_back(i);
         printf("%d ", i);
@@ -58,7 +59,7 @@ extern "C"
     }
 
     // Free the allocated mask
-    numa_free_cpumask(mask);
+    numa_free_cpumask(cpu_mask);
   }
 }
 
@@ -103,13 +104,13 @@ int get_gpu_affinity_to_cpu_Frontier(int cpu)
   }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // ensure numa library is reachable
   isnuma_available();
 
-  int *cpu_list = new int[128];
-  int *cpu_count = new int[1];
+  int* cpu_list = new int[128];
+  int* cpu_count = new int[1];
 
   pid_t pid = getpid();
   get_cpu_affinity_to_pid(pid, cpu_list, cpu_count);
