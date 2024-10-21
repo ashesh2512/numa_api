@@ -2,18 +2,22 @@ CC = gcc
 CXX = g++
 
 CCFLAGS = -g
-CXXFLAGS = -g
+CXXFLAGS = -g -fPIC
 LDFLAGS = -L/home/users/sharmaas/opt/numactl/lib -lnuma  # Link against numa shared library
 
 SRC = numa_api.cpp
 OBJ = $(SRC:.cpp=.o)
-TARGET = numa_api.exe
+TARGET = numa_api
+SHARED_LIB = libnuma_api.so
 
 # Build target
-all: $(TARGET)
+all: $(TARGET) $(SHARED_LIB)
 
 $(TARGET): $(OBJ)
 	$(CXX) -o $@ $^ $(LDFLAGS)
+
+$(SHARED_LIB): $(OBJ)
+	$(CXX) -shared -o $@ $^ $(LDFLAGS)
 
 # Compile source files
 %.o: %.cpp
@@ -21,4 +25,4 @@ $(TARGET): $(OBJ)
 
 # Clean target
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJ) $(TARGET) $(SHARED_LIB)
