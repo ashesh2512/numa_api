@@ -121,7 +121,7 @@ extern "C"
 
     // Check for uniqueness
     if (unique_gpus.size() > 1) {
-      printf("Warning: Not all CPUs are associated with the same GPU!\n");
+      printf("Warning in PID %d: Not all CPUs are associated with the same GPU!\n", pid);
     } 
 
     // Populate the gpu_list with unique GPUs
@@ -149,7 +149,7 @@ int main(int argc, char* argv[])
   int* gpu_count = new int[1];
 
   pid_t pid = getpid();
-  get_gpu_affinity_to_pid(pid, gpu_list, gpu_count);
+  get_gpu_affinity_to_pid_Frontier(pid, gpu_list, gpu_count);
 
   delete[] gpu_list;
   delete[] gpu_count;
