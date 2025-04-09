@@ -3,7 +3,7 @@ CXX = g++
 
 CCFLAGS = -g
 CXXFLAGS = -g -fPIC
-LDFLAGS = -L/home/users/sharmaas/opt/numactl/lib -lnuma  # Link against numa shared library
+LDFLAGS = -L${NUMA_LIB} -lnuma  # Link against numa shared library
 
 SRC = numa_api.cpp
 OBJ = $(SRC:.cpp=.o)
