@@ -1,6 +1,6 @@
 This is a leightweight Python wrapper around https://github.com/numactl/numactl. Currently supported only for Frontier supercomputer at OLCF.
 
-## Requirements for compiling - 
+## Requirements for compiling 
 1.  Installed copy of `numactl`
 2.  Setting the environment variable `NUMA_LIB` to the location where `numactl` libraries were installed
 
