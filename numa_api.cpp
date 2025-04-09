@@ -119,7 +119,7 @@ extern "C"
       unique_gpus.insert(gpu);
     }
 
-    // Check for uniqueness
+    // Sanity check for uniqueness
     if (unique_gpus.size() > 1) {
       printf("Warning in PID %d: Not all CPUs are associated with the same GPU!\n", pid);
     } 
