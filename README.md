@@ -40,6 +40,7 @@ pid = os.getpid()
 gpu_list, gpu_count = get_gpu_affinity(pid)
 
 # Optionally, set the appropriate GPU based on the system architecture
+# This doesn't work with Torchrun because Torchrun will launch its process without any regards for NUMA affinity 
 gpu_idx = int(gpu_list[0])
-torch.cuda.set_device(gpu_idx) - this doesn't work with Torchrun because Torchrun will launch its process without any regards for NUMA affinity 
+torch.cuda.set_device(gpu_idx)
 ```
