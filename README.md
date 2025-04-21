@@ -38,4 +38,8 @@ def get_gpu_affinity(pid):
 # Get the cpu/gpu bindings to process id anywhere in user Python code
 pid = os.getpid()
 gpu_list, gpu_count = get_gpu_affinity(pid)
+
+# Optionally, set the appropriate GPU based on the system architecture
+gpu_idx = int(gpu_list[0])
+torch.cuda.set_device(gpu_idx) - this doesn't work with Torchrun because Torchrun will launch its process without any regards for NUMA affinity 
 ```
