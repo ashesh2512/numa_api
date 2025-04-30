@@ -2,7 +2,7 @@ This is a leightweight Python wrapper around https://github.com/numactl/numactl.
 
 ## Requirements for compiling 
 1.  Installed copy of `numactl`
-3.  Setting the environment variable `NUMA_LIB` to the location where `numactl` libraries were installed
+3.  Setting the environment variable `NUMA_LIB` to the location where `numactl` libraries are installed
 
 If a pre-installed copy of `numactl` is not available, run `git submodule init && git submodule update` to checkout a copy of `numactl` as a submodule. Run `make local_numactl`. This will install `numactl` and set `NUMA_LIB` appropriately.
 
