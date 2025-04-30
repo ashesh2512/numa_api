@@ -23,6 +23,21 @@ $(SHARED_LIB): $(OBJ)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+NUMACTL_DIR = $(CURDIR)/numactl/install
+NUMA_LIB = $(NUMACTL_DIR)/lib
+
+local_numactl:
+	@cd numactl && \
+		./autogen.sh && \
+		./configure --prefix=$(NUMACTL_DIR) && \
+		make && \
+		make install
+	@echo "numactl installed in $(NUMACTL_DIR)"
+
+$(TARGET) $(SHARED_LIB): $(local_numactl)
+
 # Clean target
 clean:
 	rm -f $(OBJ) $(TARGET) $(SHARED_LIB)
+	rm -rf $(NUMACTL_DIR)
+	@cd numactl && make clean
