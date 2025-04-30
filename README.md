@@ -2,9 +2,11 @@ This is a leightweight Python wrapper around https://github.com/numactl/numactl.
 
 ## Requirements for compiling 
 1.  Installed copy of `numactl`
-2.  Setting the environment variable `NUMA_LIB` to the location where `numactl` libraries were installed
+3.  Setting the environment variable `NUMA_LIB` to the location where `numactl` libraries were installed
 
-To build, run `make` from `numa_api` home directory.
+If a pre-installed copy of `numactl` is not available, run `git submodule init && git submodule update` to checkout a copy of `numactl` as a submodule. Run `make local_numactl`. This will install `numactl` and set `NUMA_LIB` appropriately.
+
+Run `make` from `numa_api` home directory. 
 
 ## Supported functionality
 1.  `get_cpu_affinity_to_pid` - Given a process id, get the CPU the process id is running on. By default this function prints GPU affinity for the PID.
