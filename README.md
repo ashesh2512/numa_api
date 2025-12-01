@@ -9,8 +9,8 @@ If a pre-installed copy of `numactl` is not available, run `git submodule init &
 Run `make` from `numa_api` home directory. 
 
 ## Supported functionality
-1.  `get_cpu_affinity_to_pid` - Given a process id, get the CPU the process id is running on. By default this function prints the CPU affinity for the PID.
-2.  `get_gpu_affinity_to_pid_Frontier` - Given a process id, get the GPU the process id is running on for Frontier node architecure. By default this function prints the proposed GPU affinity for the PID.
+1.  `get_cpu_affinity_to_pid` - Given a process id (PID), get the CPU the PID is running on.
+2.  `get_gpu_affinity_to_pid_Frontier` - Given a PID, get the proposed GPU for optimal CPU-GPU affinity on Frontier node architecure.
 
 ## Use in Python script
 The below code snippet highlights the important aspects of working with `numa_api`. We use `ctypes` to call functions in the `numa_api` library.
