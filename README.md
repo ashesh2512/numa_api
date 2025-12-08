@@ -1,6 +1,6 @@
 This is a leightweight Python wrapper around https://github.com/numactl/numactl. Currently supported only for Frontier supercomputer at OLCF.
 
-Upon cloning the repository, run `git submodule init && git submodule update` to checkout a copy of `numactl` as a submodule. Run `make` from `numa_api` home directory. 
+Upon cloning the repository, `cd numa_api`, and `git submodule init && git submodule update` to checkout a copy of `numactl` as a submodule. Run `make`. 
 
 ## Supported functionality
 1.  `get_cpu_affinity_to_pid` - Given a process id (PID), get the CPU the PID is running on. This also prints the CPU affinity to PID.
