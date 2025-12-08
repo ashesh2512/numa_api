@@ -13,7 +13,7 @@ Run `make` from `numa_api` home directory.
 2.  `get_gpu_affinity_to_pid_Frontier` - Given a PID, get the proposed GPU for optimal CPU-GPU affinity on Frontier node architecure. This also prints the proposed GPU for optimal affinity to CPU based on the PID.
 
 ## Use in Python script
-The below code snippet highlights the important aspects of working with `numa_api`. We use `ctypes` to call functions in the `numa_api` library.
+The below code snippet highlights the important aspects of working with `numa_api`. We use `ctypes` to call functions in the `numa_api` library. Paste this snippet of code towards the top of your driver script.
 ```python
 import ctypes
 import os
@@ -36,8 +36,10 @@ def get_gpu_affinity(pid):
 
     # Collect results
     return gpu_list, gpu_count.value
-
-# Get the cpu/gpu bindings to process id anywhere in user Python code
+```
+Call the `get_gpu_affinity` function close to where the device ids are being set using `torch.cuda.set_device`. Compare the device ids being set against the output of `get_gpu_affinity`!
+```
 pid = os.getpid()
 gpu_list, gpu_count = get_gpu_affinity(pid)
 ```
+
