@@ -125,7 +125,7 @@ extern "C"
     } 
 
     // Populate the gpu_list with unique GPUs
-    printf("GPU affinity for PID %d: ", pid);
+    printf("Suggested GPU for PID %d: ", pid);
     *gpu_count = unique_gpus.size();
     int index = 0;
     for (const auto& gpu : unique_gpus) {
