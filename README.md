@@ -3,8 +3,8 @@ This is a leightweight Python wrapper around https://github.com/numactl/numactl.
 Upon cloning the repository, `cd numa_api`, and `git submodule init && git submodule update` to checkout a copy of `numactl` as a submodule. Run `make`. 
 
 ## Supported functionality
-1.  `get_cpu_affinity_to_pid` - Given a process id (PID), get the CPU the PID is running on. This also prints the CPU affinity to PID.
-2.  `get_gpu_affinity_to_pid_Frontier` - Given a PID, get the proposed GPU for optimal CPU-GPU affinity on Frontier node architecure. This also prints the proposed GPU for optimal affinity to CPU based on the PID.
+1.  `get_core_affinity_to_pid` - Given a process id (PID), get the CPU core the PID is running on. This also prints the core affinity to PID.
+2.  `get_gpu_affinity_to_pid_Frontier` - Given a PID, get the proposed GPU for optimal core-GPU affinity on Frontier node architecure. This also prints the proposed GPU for optimal affinity to CPU core based on the PID.
 
 ## Use in Python script
 The below code snippet highlights the important aspects of working with `numa_api`. We use `ctypes` to call functions in the `numa_api` library. Paste this snippet of code towards the top of your driver script.
@@ -21,7 +21,7 @@ numa_api_lib.get_gpu_affinity_to_pid_Frontier.argtypes = [ctypes.c_int,
                                                           ctypes.POINTER(ctypes.c_int)]
 numa_api_lib.get_gpu_affinity_to_pid_Frontier.restype = None
 
-# interfacing with numa_api to get the cpu/gpu affinity
+# interfacing with numa_api to get the cpu core/gpu affinity
 def get_gpu_affinity(pid):
     gpu_list = (ctypes.c_int * 8)()  # 8 here corresponds to the number of GPUs on Frontier
     gpu_count = ctypes.c_int()
