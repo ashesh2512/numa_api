@@ -101,6 +101,7 @@ extern "C"
     else
     {
       fprintf(stderr, "found core %d that shouldn't exist in Frontier architecture\n", core);
+      return -1;
     }
   }
 
